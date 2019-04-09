@@ -43,6 +43,7 @@ def extract_movies(dom):
     ratings = []
     for rating in dom.find_all("div", class_="inline-block ratings-imdb-rating"):
         rating = rating.text
+        # Removes the \n that are in the rating
         rating = rating.replace("\n", "")
         ratings.append(rating)
 

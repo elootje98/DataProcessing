@@ -39,8 +39,7 @@ def plot_data(data_dict):
     """
     Plot the data
     """
-    # lists = data_dict.items()
-    # x, y = zip(*lists)
+
     plt.ylabel("Rating", fontsize=14, color='red')
     plt.xlabel("Years", fontsize=14, color='red')
     x = []
@@ -48,8 +47,10 @@ def plot_data(data_dict):
     for key in data_dict:
         x.append(key)
         rating = data_dict[key]
-        y.append((float(rating)))
+        y.append(float(rating))
+    plt.ytickformat('%.1f')
     plt.plot(x, y)
+    # plt.style.use(['dark_background', 'presentation'])
     plt.show()
 
 if __name__ == "__main__":
