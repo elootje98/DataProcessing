@@ -50,18 +50,14 @@ def extract_movies(dom):
     years = []
     for year in dom.find_all("span", class_="lister-item-year text-muted unbold"):
         year = year.text
-        if len(year) is 11:
-            year = year[6:-1]
-        elif len(year) is 10:
-            year = year[5:-1]
-        else:
-            year = year[1:-1]
+        year = year.replace("(", "").replace(")", "").replace("I", "").replace("II", "").replace(" ", "")
         years.append(year)
 
     # Get actors from the page and put them in list 'actors'
     actors = []
     for actor in dom.find_all("a", class_=""):
         actor_href = actor.get("href")
+        # To only get the actors, and not the directors
         if "adv_li_st" in actor_href:
             actors.append(actor.text)
 
@@ -72,7 +68,11 @@ def extract_movies(dom):
 
     # Get all the lists into a new list called movies.
     movies = []
-    movies.append(titles, ratings, years, actors, runtimes)
+    movies.append(titles)
+    movies.append(ratings)
+    movies.append(years)
+    movies.append(actors)
+    movies.append(runtimes)
 
     return movies
 
@@ -87,13 +87,14 @@ def save_csv(outfile, movies):
     # Loop over the movies
     for movie in range(number_of_movies):
         datas_movie = []
+        all_data_movie = []
         # Loop over the data from the movie (title, rating, year, actors and runtime)
         for data in range(number_of_data):
             group = movies[data]
             data_movie = group[movie]
             # Put all data from that movie in "all_data_movie"
             all_data_movie.append(data_movie)
-        writer.writerow(all_datas_movie)
+        writer.writerow(all_data_movie)
 
 def simple_get(url):
     """
