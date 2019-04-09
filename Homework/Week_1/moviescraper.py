@@ -87,7 +87,7 @@ def save_csv(outfile, movies):
     # Loop over the movies
     for movie in range(number_of_movies):
         datas_movie = []
-        # all_data_movie = []
+        
         # Loop over the data from the movie (title, rating, year, actors and runtime)
         for data in range(number_of_data):
             group = movies[data]
