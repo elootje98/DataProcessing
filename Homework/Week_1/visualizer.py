@@ -13,11 +13,12 @@ INPUT_CSV = "movies.csv"
 START_YEAR = 2008
 END_YEAR = 2018
 
-# Open the csv file and extract needed data
-# make global dictionary from the data
+
+# Make global dictionary from the data
 ratings_in_year = []
 data_dict = {str(key): [] for key in range(START_YEAR, END_YEAR)}
-print(data_dict)
+
+# Open the csv file and extract needed data
 with open('movies.csv', newline='') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
