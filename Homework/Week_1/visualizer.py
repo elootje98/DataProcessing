@@ -39,7 +39,7 @@ def plot_data(data_dict):
     """
     Plot the data
     """
-
+    plt.ylim(1, 10)
     plt.ylabel("Rating", fontsize=14, color='red')
     plt.xlabel("Years", fontsize=14, color='red')
     x = []
