@@ -92,9 +92,11 @@ def save_csv(outfile, movies):
         for data in range(number_of_data):
             group = movies[data]
             data_movie = group[movie]
+
             # Put all data from that movie in "all_data_movie"
             datas_movie.append(data_movie)
-            # all_data_movie.append(data_movie)
+
+        # Write the data from the movie to the csv file
         writer.writerow(datas_movie)
 
 def simple_get(url):
