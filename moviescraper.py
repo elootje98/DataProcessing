@@ -16,6 +16,9 @@ TARGET_URL = "https://www.imdb.com/search/title?title_type=feature&release_date=
 BACKUP_HTML = 'movies.html'
 OUTPUT_CSV = 'movies.csv'
 
+number_of_movies = 50
+number_of_data = 5
+last_movie = "Toy Story 3"
 
 def extract_movies(dom):
     """
@@ -28,62 +31,50 @@ def extract_movies(dom):
     - Runtime (only a number!)
     """
 
-    # THIS IS THE RIGHT WAY TO GET THE TITLES
-    # LIST IS GOOD NOW
-    # titles = []
-    # for heds in dom.find_all('h3'):
-    #     title = heds.a.text
-    #     print(title)
-    #     titles.append(title)
-    #     if title == "Toy Story 3":
-    #         break
-    # print("TITLE", titles)
+    # Get the titles form the page and put them in list 'titles'
+    titles = []
+    for heds in dom.find_all('h3'):
+        title = heds.a.text
+        titles.append(title)
+        if title == last_movie:
+            break
 
-    # LIKE THIS YOU CAN FIND THE YEAR
-    # LIST IS GOOD NOW
-    # years = []
-    # for year in dom.find_all("span", class_="lister-item-year text-muted unbold"):
-    #     year = year.text
-    #     if len(year) is 11:
-    #         year = year[6:-1]
-    #     elif len(year) is 10:
-    #         year = year[5:-1]
-    #     else:
-    #         year = year[1:-1]
-    #     years.append(year)
-    # print(years)
+    # Get the ratings from the page and put them in list 'ratings'
+    ratings = []
+    for rating in dom.find_all("div", class_="inline-block ratings-imdb-rating"):
+        rating = rating.text
+        rating = rating.replace("\n", "")
+        ratings.append(rating)
 
-    # LIKE THIS YOU CAN FIND THE Runtime
-    # LIST IS GOOD NOW
-    # runtimes = []
-    # for runtime in dom.find_all("span", class_="runtime"):
-    #     runtimes.append(runtime.text)
-    # print(runtimes)
+    # Get years from the page and put them in list 'years'
+    years = []
+    for year in dom.find_all("span", class_="lister-item-year text-muted unbold"):
+        year = year.text
+        if len(year) is 11:
+            year = year[6:-1]
+        elif len(year) is 10:
+            year = year[5:-1]
+        else:
+            year = year[1:-1]
+        years.append(year)
 
-    # LIKE THIS YOU CAN FIND THE RATING
-    # THE LIST IS GOOD NOW
-    # ratings = []
-    # for rating in dom.find_all("div", class_="inline-block ratings-imdb-rating"):
-    #     rating = rating.text
-    #     rating = rating.replace("\n", "")
-    #     ratings.append(rating)
-    # print(ratings)
+    # Get actors from the page and put them in list 'actors'
+    actors = []
+    for actor in dom.find_all("a", class_=""):
+        actor_href = actor.get("href")
+        if "adv_li_st" in actor_href:
+            actors.append(actor.text)
 
-    # LIKE THIS YOU CAN FIND THE ACTORS
-    # actors = []
-    # for actor in dom.find_all("a", class_=""):
-    #     actor_href = actor.get("href")
-    #     if "adv_li_st" in actor_href:
-    #         actors.append(actor.text)
-    # print(actors)
+    # Get runtimes form the page and put them in list 'runtimes'
+    runtimes = []
+    for runtime in dom.find_all("span", class_="runtime"):
+        runtimes.append(runtime.text)
 
-    # ADD YOUR CODE HERE TO EXTRACT THE ABOVE INFORMATION ABOUT THE
-    # HIGHEST RATED MOVIES
-    # NOTE: FOR THIS EXERCISE YOU ARE ALLOWED (BUT NOT REQUIRED) TO IGNORE
-    # UNICODE CHARACTERS AND SIMPLY LEAVE THEM OUT OF THE OUTPUT.
+    # Get all the lists into a new list called movies.
+    movies = []
+    movies.append(titles, ratings, years, actors, runtimes)
 
-    return []   # REPLACE THIS LINE AS WELL IF APPROPRIATE
-
+    return movies
 
 def save_csv(outfile, movies):
     """
@@ -92,8 +83,17 @@ def save_csv(outfile, movies):
     writer = csv.writer(outfile)
     writer.writerow(['Title', 'Rating', 'Year', 'Actors', 'Runtime'])
 
-    # ADD SOME CODE OF YOURSELF HERE TO WRITE THE MOVIES TO DISK
-
+    # Write the data into the csv file
+    # Loop over the movies
+    for movie in range(number_of_movies):
+        datas_movie = []
+        # Loop over the data from the movie (title, rating, year, actors and runtime)
+        for data in range(number_of_data):
+            group = movies[data]
+            data_movie = group[movie]
+            # Put all data from that movie in "all_data_movie"
+            all_data_movie.append(data_movie)
+        writer.writerow(all_datas_movie)
 
 def simple_get(url):
     """
