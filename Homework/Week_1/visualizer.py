@@ -17,6 +17,7 @@ END_YEAR = 2018
 # make global dictionary from the data
 ratings_in_year = []
 data_dict = {str(key): [] for key in range(START_YEAR, END_YEAR)}
+print(data_dict)
 with open('movies.csv', newline='') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
@@ -30,18 +31,25 @@ with open('movies.csv', newline='') as csvfile:
 for year in data_dict:
     average_total = 0
     ratings_in_year = data_dict[year]
+
+    # Calculate the average of the ratings of that year
     for rating in ratings_in_year:
         average_total = float(rating) + average_total
         average = round(average_total / len(ratings_in_year), 1)
+
+    # Add the calculated average to the data_dict
     data_dict[year] = str(average)
 
 def plot_data(data_dict):
     """
     Plot the data
     """
+    # Set limit of the y ax and give labels to the x and y axes.
     plt.ylim(1, 10)
     plt.ylabel("Rating", fontsize=14, color='red')
     plt.xlabel("Years", fontsize=14, color='red')
+
+    # Plot the data
     x = []
     y = []
     for key in data_dict:
