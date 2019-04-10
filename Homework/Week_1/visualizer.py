@@ -49,6 +49,7 @@ def plot_data(data_dict):
     plt.ylim(1, 10)
     plt.ylabel("Rating", fontsize=14, color='red')
     plt.xlabel("Years", fontsize=14, color='red')
+    plt.title("Average rating for movies 2008-2017", size="20", color="red")
 
     # Plot the data
     x = []
