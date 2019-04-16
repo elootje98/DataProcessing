@@ -16,9 +16,13 @@ def main():
 
     # Delete the rows that dont contain a value for a certain column.
     data_countries = data_countries.dropna()
+
+    # Delete the rows that contain "unknown" as value
     data_countries = data_countries[data_countries['GDP ($ per capita) dollars'] != "unknown"]
     data_countries = data_countries[data_countries['Infant mortality (per 1000 births)'] != "unknown"]
     data_countries = data_countries[data_countries['Pop. Density (per sq. mi.)'] != "unknown"]
+
+    # Replace the , by a . and convert to float or int. Also remove "dollars" for gdp.
     data_countries["Region"] = data_countries["Region"].str.replace(" ", "")
     data_countries["Pop. Density (per sq. mi.)"] = data_countries["Pop. Density (per sq. mi.)"].str.replace(",", ".").astype("float64")
     data_countries["Infant mortality (per 1000 births)"] = data_countries["Infant mortality (per 1000 births)"].str.replace(",", ".").astype("float64")
@@ -65,6 +69,7 @@ def main():
         country = countries[i]
         region = regions[i]
         infant = infant_mortality[i]
+
         # You have to transfer it to a real int, since first it was a np int and you cant
         # write those into the json file.
         gdp_dict = int(gdp_int[i])
@@ -78,7 +83,7 @@ def main():
             "GDP ($ per capita) dollars": gdp_dict
             }
 
-    # Write the dict_data ot a json file
+    # Write the dict_data to a json file
     write_to_json("data_file.json", dict_data)
 
 def load_csv(input):
@@ -95,6 +100,8 @@ def write_to_json(outfile, data):
         json.dump(data, write_file)
 
 def calculate_tendency(column):
+    """Calculates the mean, median and mode. Prints them too"""
+
     int_mean = column.mean()
     int_median = column.median()
     deviation = column.std()
@@ -104,6 +111,8 @@ def calculate_tendency(column):
     print("------------------------------")
 
 def calculate_five_number(column):
+    """Calculates the minimu, first quartile, median, third quartile and maximum"""
+
     minimum = column.min()
     maximum = column.max()
     median = column.median()
@@ -111,7 +120,7 @@ def calculate_five_number(column):
     print("First Quartile: ", column.quantile(0.25))
     print("Median: ", median)
     print("Third Quartile: ", column.quantile(0.75))
-    print("Maximim: ", maximum)
+    print("Maximum: ", maximum)
     print("------------------------------")
 
 if __name__ == "__main__":
