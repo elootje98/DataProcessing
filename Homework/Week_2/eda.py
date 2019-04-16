@@ -46,6 +46,7 @@ def main():
     plt.xlabel("GDP")
     plt.ylabel("Countries")
     plt.hist(x, bins=50)
+    plt.grid(color='r', linestyle='-', linewidth=0.5)
     plt.show()
 
     # Calculate minimum, first quartile, median, third quartile and maximum from infant mortality
@@ -57,6 +58,7 @@ def main():
     plt.ylabel("Infant mortality (per 1000 births)")
     plt.xlabel("")
     plt.boxplot(infant_mortality)
+    plt.grid(color='b', linestyle='-', linewidth=0.3)
     plt.show()
 
     # Write to the json file
