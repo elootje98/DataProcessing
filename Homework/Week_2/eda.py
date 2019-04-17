@@ -113,7 +113,8 @@ def calculate_tendency(column):
     print("------------------------------")
 
 def calculate_five_number(column):
-    """Calculates the minimu, first quartile, median, third quartile and maximum"""
+    """Calculates the minimu, first quartile, median, third quartile and maximum.
+       Prints them too"""
 
     minimum = column.min()
     maximum = column.max()
