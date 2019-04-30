@@ -1,0 +1,152 @@
+<!-- Elodie Rijnja 10984682
+Data of last week in html  -->
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+<h1>Temperature in March 2019</h1>
+<canvas id="myCanvas"></canvas>
+<script>
+  // Settings for canvas
+  var myCanvas = document.getElementById("myCanvas");
+  myCanvas.title = "temperature";
+  myCanvas.width = 1300;
+  myCanvas.height = 800;
+  var ctx = myCanvas.getContext("2d");
+
+  function drawLine(ctx, startX, startY, endX, endY){
+    ctx.beginPath();
+
+    // You do + 100 to move the whole graph more to the right, for more space.
+    ctx.moveTo(startX + 100,startY);
+    ctx.lineTo(endX + 100,endY);
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  }
+
+  function drawXGrid(ctx, startX, startY, endX, endY, data_min, year){
+    ctx.beginPath();
+
+    // You do + 100 to move the whole grid more to the right, for more space.
+    ctx.moveTo(startX + 100,startY);
+    ctx.lineTo(endX + 100,endY);
+    ctx.lineWidth = 1;
+    ctx.fillText(year, startX + 95, data_min + 11);
+    ctx.stroke();
+  }
+
+  // function drawYGrid(ctx, startX, endX, ymax){
+  //   ctx.beginPath();
+  //   var increase = ymax / lines;
+  //   var value = 0.1;
+  //   for(var = i; i < 91; i++){
+  //     ctx.moveTo(startX, increase);
+  //     ctx.lineTo(endX, increase);
+  //     ctx.lineWidth = 0.5;
+  //     ctx.fillText(value, startX, increase);
+  //     ctx.stroke();
+  //     increase = increase + increase;
+  //     value = value + 0.1;
+  //   }
+
+  function createTransform(domain, range){
+	// domain is a two-element array of the data bounds [domain_min, domain_max]
+	// range is a two-element array of the screen bounds [range_min, range_max]
+	// this gives you two equations to solve:
+	// range_min = alpha * domain_min + beta
+	// range_max = alpha * domain_max + beta
+ 		// a solution would be:
+
+    var domain_min = domain[0]
+    var domain_max = domain[1]
+    var range_min = range[0]
+    var range_max = range[1]
+
+    // formulas to calculate the alpha and the beta
+   	var alpha = (range_max - range_min) / (domain_max - domain_min)
+    var beta = range_max - alpha * domain_max
+
+    // returns the function for the linear transformation (y= a * x + b)
+    return function(x){
+      return alpha * x + beta;
+    }
+  }
+
+  var fileName = "file.json";
+  var txtFile = new XMLHttpRequest();
+  txtFile.onreadystatechange = function() {
+      if (txtFile.readyState === 4 && txtFile.status == 200) {
+        var data = JSON.parse(txtFile.responseText);
+
+        // This is a list of all the dates, its a list with values
+        var dates = Object.keys(data);
+
+        // This is a list of all the temperatures, its a list with objects.
+        var temps = Object.values(data);
+
+        // Loop over all the temperatures and put them in a list.
+        var list_temps = []
+        for(var i = 0; i < 31; i++){
+          temperature = Number(temps[i]["Temperature"]);
+          list_temps.push(temperature);
+        }
+
+        // Find the maximum and minimum value of the data for y value
+        var data_max = Math.max(...list_temps);
+        var data_min = Math.min(...list_temps);
+
+        // Find the maximum and the miminum value of the data for x values
+        var data_xmax = Math.max(...dates);
+        var data_xmin = Math.min(...dates);
+
+        // Fill it in for the create transform, retruns function that can scale
+        // the y values.
+        var scaleFunctionYValue = createTransform([data_min, data_max], [0, 600]);
+
+        // Do the same for the x values
+        var scaleFunctionXValue = createTransform([data_xmin, data_xmax], [0, 800]);
+
+        // Make an axes
+        drawLine(ctx, scaleFunctionXValue(data_xmin), scaleFunctionYValue(data_min), scaleFunctionXValue(data_xmin), scaleFunctionYValue(data_max));
+        drawLine(ctx, scaleFunctionXValue(data_xmin), scaleFunctionYValue(data_max), scaleFunctionXValue(data_xmax), scaleFunctionYValue(data_max));
+
+        // To draw a line, you need to know the old x and the old y values.
+        // So the new and old date and temperatures.
+        for(var i = 1; i < 31; i++){
+          // To get the dates, you loop over the list
+          new_date = dates[i];
+          old_date = dates[i - 1];
+
+          // To get the temperatures, you loop over the list and take the value from the
+          // key "temperature".
+          new_temperature = temps[i]["Temperature"];
+          old_temperature = temps[i - 1]["Temperature"];
+
+          // Scale the two temperature values
+          new_temperatureScaled = scaleFunctionYValue(new_temperature);
+          old_temperatureScaled = scaleFunctionYValue(old_temperature);
+
+          // Scale the two date values
+          new_dateScaled = scaleFunctionXValue(new_date);
+          old_dateScaled = scaleFunctionXValue(old_date);
+
+          // Now you can draw the line.
+          // You do 600 - temp, since else the line will be upside down.
+          drawLine(ctx, old_dateScaled, 600 - old_temperatureScaled, new_dateScaled, 600 - new_temperatureScaled);
+
+          // Make a grid.
+          // ctx.fillText("01", scaleFunctionXValue(dates[0) data_min - 10);
+          drawXGrid(ctx, new_dateScaled, scaleFunctionYValue(data_min), new_dateScaled, scaleFunctionYValue(data_max), 600 - scaleFunctionYValue(data_min), new_date.slice(6, 8));
+          // drawYGrid(ctx, scaleFunctionXValue(data_xmin), scaleFunctionXValue(data_xmax), scaleFunctionYValue(data_max));
+        }
+      }
+  }
+  txtFile.open("GET", fileName);
+  txtFile.send();
+
+</script>
+</body>
+</html>
