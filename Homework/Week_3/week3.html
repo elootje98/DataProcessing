@@ -38,19 +38,37 @@ Data of last week in html  -->
     ctx.stroke();
   }
 
-  // function drawYGrid(ctx, startX, endX, ymax){
-  //   ctx.beginPath();
-  //   var increase = ymax / lines;
-  //   var value = 0.1;
-  //   for(var = i; i < 91; i++){
-  //     ctx.moveTo(startX, increase);
-  //     ctx.lineTo(endX, increase);
-  //     ctx.lineWidth = 0.5;
-  //     ctx.fillText(value, startX, increase);
-  //     ctx.stroke();
-  //     increase = increase + increase;
-  //     value = value + 0.1;
-  //   }
+  function drawYGrid(ctx, startX, endX, ymax){
+    var lines = 92;
+    var step = (600 - ymax) / 92;
+    var yValue = step;
+    var count = 17.3;
+    console.log(ymax);
+    console.log(step);
+
+    for(var i = 0; i < lines; i++){
+      ctx.beginPath();
+      ctx.moveTo(startX + 100, yValue);
+      ctx.lineTo(endX + 100, yValue);
+      ctx.lineWidth = 0.4;
+
+      // Only print the number on the y when they are half numbers
+      // Also make the line thicker then.
+      if (count % 0.5 == 0){
+        ctx.fillText(count, startX + 75, yValue);
+        ctx.lineWidth = 1.0;
+      }
+
+      ctx.stroke();
+
+      // The next y coordinate for the next line to draw.
+      yValue = yValue + step;
+
+      // The next value of the number on the y ax displayed, rouned to one decimal.
+      count = Math.round((count - 0.1) * 10) / 10;
+    }
+
+  }
 
   function createTransform(domain, range){
 	// domain is a two-element array of the data bounds [domain_min, domain_max]
@@ -113,6 +131,9 @@ Data of last week in html  -->
         drawLine(ctx, scaleFunctionXValue(data_xmin), scaleFunctionYValue(data_min), scaleFunctionXValue(data_xmin), scaleFunctionYValue(data_max));
         drawLine(ctx, scaleFunctionXValue(data_xmin), scaleFunctionYValue(data_max), scaleFunctionXValue(data_xmax), scaleFunctionYValue(data_max));
 
+        // Make the Y grid
+        drawYGrid(ctx, scaleFunctionXValue(dates[0]), scaleFunctionXValue(dates[30]), scaleFunctionYValue(temps[0]["Temperature"]));
+
         // To draw a line, you need to know the old x and the old y values.
         // So the new and old date and temperatures.
         for(var i = 1; i < 31; i++){
@@ -140,10 +161,9 @@ Data of last week in html  -->
           // Make a grid.
           // ctx.fillText("01", scaleFunctionXValue(dates[0) data_min - 10);
           drawXGrid(ctx, new_dateScaled, scaleFunctionYValue(data_min), new_dateScaled, scaleFunctionYValue(data_max), 600 - scaleFunctionYValue(data_min), new_date.slice(6, 8));
-          // drawYGrid(ctx, scaleFunctionXValue(data_xmin), scaleFunctionXValue(data_xmax), scaleFunctionYValue(data_max));
-        }
       }
   }
+}
   txtFile.open("GET", fileName);
   txtFile.send();
 
