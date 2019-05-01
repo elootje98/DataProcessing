@@ -7,55 +7,56 @@ Data of last week in html  -->
 <title>Page Title</title>
 </head>
 <body>
-<h1>Temperature in March 2019</h1>
+<p>Elodie Rijnja 10984682 JavaScript intro</p>
+<p>http://projects.knmi.nl/klimatologie/daggegevens/selectie.cgi</p>
 <canvas id="myCanvas"></canvas>
 <script>
   // Settings for canvas
   var myCanvas = document.getElementById("myCanvas");
   myCanvas.title = "temperature";
   myCanvas.width = 1300;
-  myCanvas.height = 800;
+  myCanvas.height = 2500;
   var ctx = myCanvas.getContext("2d");
 
   function drawLine(ctx, startX, startY, endX, endY){
     ctx.beginPath();
+    // This function draws a line.
 
-    // You do + 100 to move the whole graph more to the right, for more space.
-    ctx.moveTo(startX + 100,startY);
-    ctx.lineTo(endX + 100,endY);
+    // You do + 100 to move the whole graph more to the right and down, for more space.
+    ctx.moveTo(startX + 100,startY + 100);
+    ctx.lineTo(endX + 100,endY + 100);
     ctx.lineWidth = 3;
     ctx.stroke();
   }
 
   function drawXGrid(ctx, startX, startY, endX, endY, data_min, year){
     ctx.beginPath();
-
-    // You do + 100 to move the whole grid more to the right, for more space.
-    ctx.moveTo(startX + 100,startY);
-    ctx.lineTo(endX + 100,endY);
+    // This function draws the grid for the X axis and adds the day of the month
+    // You do + 100 to move the whole grid more to the right and down for more space.
+    ctx.moveTo(startX + 100,startY + 100);
+    ctx.lineTo(endX + 100,endY + 100);
     ctx.lineWidth = 1;
-    ctx.fillText(year, startX + 95, data_min + 11);
+    ctx.fillText(year, startX + 95, data_min + 111);
     ctx.stroke();
   }
 
   function drawYGrid(ctx, startX, endX, ymax){
+    // This function draws the grid for the Y axis
     var lines = 92;
     var step = (600 - ymax) / 92;
     var yValue = step;
     var count = 17.3;
-    console.log(ymax);
-    console.log(step);
 
     for(var i = 0; i < lines; i++){
       ctx.beginPath();
-      ctx.moveTo(startX + 100, yValue);
-      ctx.lineTo(endX + 100, yValue);
+      ctx.moveTo(startX + 100, yValue + 100);
+      ctx.lineTo(endX + 100, yValue + 100);
       ctx.lineWidth = 0.4;
 
       // Only print the number on the y when they are half numbers
       // Also make the line thicker then.
       if (count % 0.5 == 0){
-        ctx.fillText(count, startX + 75, yValue);
+        ctx.fillText(count, startX + 75, yValue + 100);
         ctx.lineWidth = 1.0;
       }
 
@@ -127,7 +128,7 @@ Data of last week in html  -->
         // Do the same for the x values
         var scaleFunctionXValue = createTransform([data_xmin, data_xmax], [0, 800]);
 
-        // Make an axes
+        // Make axes
         drawLine(ctx, scaleFunctionXValue(data_xmin), scaleFunctionYValue(data_min), scaleFunctionXValue(data_xmin), scaleFunctionYValue(data_max));
         drawLine(ctx, scaleFunctionXValue(data_xmin), scaleFunctionYValue(data_max), scaleFunctionXValue(data_xmax), scaleFunctionYValue(data_max));
 
@@ -159,9 +160,20 @@ Data of last week in html  -->
           drawLine(ctx, old_dateScaled, 600 - old_temperatureScaled, new_dateScaled, 600 - new_temperatureScaled);
 
           // Make a grid.
-          // ctx.fillText("01", scaleFunctionXValue(dates[0) data_min - 10);
           drawXGrid(ctx, new_dateScaled, scaleFunctionYValue(data_min), new_dateScaled, scaleFunctionYValue(data_max), 600 - scaleFunctionYValue(data_min), new_date.slice(6, 8));
       }
+
+      // To draw the first day of March
+      ctx.fillText("01", scaleFunctionXValue(dates[3]) + 7, 740 - scaleFunctionYValue(temps[0]["Temperature"] + 4,5));
+
+      // Make labels and title
+      ctx.font = "30px Arial";
+      ctx.fillText("Maximum Temperature in March 2019 at Schiphol", scaleFunctionXValue(dates[6]), 80 - scaleFunctionYValue(temps[0]["Temperature"]));
+      ctx.font = "15px Arial";
+      ctx.fillText("Day in March", scaleFunctionXValue(dates[16]), 740 - scaleFunctionYValue(temps[0]["Temperature"]));
+      ctx.rotate(-Math.PI / 2 );
+      ctx.fillText("Temperature in Degrees Celsius", -640 + scaleFunctionYValue(temps[6]["Temperature"]), scaleFunctionXValue(dates[0]) + 50);
+      ctx.restore();
   }
 }
   txtFile.open("GET", fileName);
