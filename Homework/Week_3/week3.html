@@ -60,7 +60,20 @@ Data of last week in html  -->
         ctx.lineWidth = 1.0;
       }
 
+      // Draw an thick orange line for 10 degrees.
+      if(count == 10){
+        ctx.strokeStyle = "orange";
+        ctx.lineWidth = 2.0;
+      }
+
+      // Draw a thick red line for 15 degrees.
+      if(count == 15){
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 2.0;
+      }
+
       ctx.stroke();
+      ctx.strokeStyle = "black";
 
       // The next y coordinate for the next line to draw.
       yValue = yValue + step;

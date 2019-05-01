@@ -6,9 +6,9 @@ import matplotlib.pyplot as plt
 import json
 
 # Ik weet dat ik eigenlijk de data met de pandas functie naar json zou moeten zetten.
-# Deze feedback zag ik net bij mijn opdracht van vorige week.
-# Echter heb ik er voor deze week geen tijd meer voor om dat te implementeren.
-# Ik weet nu wel hoe het werkt en zal het voor volgende keer doen! 
+# Deze feedback zag ik net bij mijn opdracht van vorige week. Alleen doordat ik het nu pas zag,
+# is er geen tijd om dat nog voor deze week te implementeren.
+# Ik weet nu wel hoe het werkt en zal het voor volgende keer doen!
 
 def main():
     # Read the data from a csv file
