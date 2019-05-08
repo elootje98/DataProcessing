@@ -44,7 +44,7 @@
           var h = 400;
           var w = 500;
           var barPadding = 3;
-          var leftPadding = 150;
+          var leftPadding = 350;
           var topPadding = 100;
 
           // Function to scale the Y values
@@ -69,7 +69,7 @@
           d3.select("body").select("svg")
             .append("g")
             .attr("class", "x axis")
-            .attr("transform", "translate(150," + (h + topPadding)  + ")")
+            .attr("transform", "translate(350," + (h + topPadding)  + ")")
             .call(d3.axisBottom(bandScale))
           .selectAll("text")
             .attr("y", 0)
@@ -82,15 +82,15 @@
           d3.select("body").select("svg")
             .append("g")
             .attr("class", "y axis")
-            .attr("transform", "translate(150," + topPadding + ")")
+            .attr("transform", "translate(350," + topPadding + ")")
             .call(d3.axisLeft(yScale));
 
           // Ad labels to the axes
           d3.select("body").select("svg")
             .append("text")
             .text("Number of deaths 0-4 years old")
-            .attr("x", -450)
-            .attr("y", 90)
+            .attr("x", -400)
+            .attr("y", 290)
             .attr("transform", "rotate(-90)");
 
           // Make the bars
