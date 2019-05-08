@@ -37,9 +37,6 @@ def write_to_json(outfile, data):
     file = open("file.json", "w")
     file.write(data)
     file.close()
-
-    # with open(outfile, "w") as write_file:
-    #     json.dump(data, write_file)
-
+    
 if __name__ == "__main__":
     main()
