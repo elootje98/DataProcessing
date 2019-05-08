@@ -112,12 +112,12 @@
             })
             .attr("fill", "teal")
             .on('mouseover', tip.show)
-            .on('mouseenter', function(actual, i){
+            .on('mouseenter', function(){
               d3.select(this)
                   .attr("fill", "red");
               })
             .on('mouseout', tip.hide)
-            .on('mouseleave', function(actual, i){
+            .on('mouseleave', function(){
               d3.select(this)
                   .attr("fill", "teal");
               });
