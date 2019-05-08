@@ -18,6 +18,8 @@
     </style>
     <script src="d3-tip.js"></script>
     <script>
+
+        // Make the titles
         d3.select("head").append("title").text("Bar chart deaths measles");
         d3.select("body")
           .append("h1")
@@ -25,7 +27,7 @@
           .text("Deaths measles in 2017");
         d3.select("body").append("h2").text("Death of measles in 2017 for different regions in the world.");
         d3.select("body").append("p").text("Elodie Rijnja 10984682\n");
-          d3.select("body").append("p").text("Every year children die of the measles. In the Western World, death rates are reduced due to an efficient vaccination programm. However, in Third World countries, the measles is still a feared killer.");
+          d3.select("body").append("p").text("Every year children die of measles. In the Western World, death rates are reduced due to an efficient vaccination programm. However, in Third World countries, measles is still a feared killer.");
 
         d3.json("file.json").then(function(datas) {
 
