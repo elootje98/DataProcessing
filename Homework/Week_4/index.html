@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<!-- http://apps.who.int/gho/data/view.main.CM1002015REG6-CH6?lang=en -->
+<html>
+  <head>
+    <meta charset="utf-8">
+        <script type="text/javascript" src="D3/d3.js"></script>
+  </head>
+  <body>
+    <script>
+        d3.select("head").append("title").text("Bar chart deaths measles");
+        d3.select("body")
+          .append("h1")
+          .style('color', 'darkOrange')
+          .text("Deaths measles in 2017");
+        d3.select("body").append("h2").text("Death of measles in 2017 for different regions in the world.");
+        d3.select("body").append("p").text("Elodie Rijnja 10984682\n");
+          d3.select("body").append("p").text("Every year children die of the measles. In the Western World, death rates are reduced due to an efficient vaccination programm. However, in Third World countries, the measles is still a feared killer.");
+
+        d3.json("file.json").then(function(datas) {
+
+          // Make a list with all the number of deaths and list with regions.
+          var children = []
+          var regions = [];
+          for(var i = 0; i < 6; i++){
+            children.push(datas[i]["0-4 years"]);
+            regions.push(datas[i]["Region"])
+          }
+
+          // Select the SVG bars and make bars of the data
+          var count = 0;
+          var h = 400;
+          var w = 500;
+          var barPadding = 3;
+          var leftPadding = 150;
+          var topPadding = 100;
+
+          // Function to scale the Y values
+          var yScale = d3.scaleLinear()
+                     .domain([0, d3.max(children)])
+                     .range([h, 0]);
+
+          // Function to scale the X values
+          var bandScale = d3.scaleBand()
+            	.domain(regions)
+            	.range([0, 200])
+            	.paddingInner(0.05);
+
+
+          // Add X as
+          d3.select("body").select("svg")
+            .append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(150," + (h + topPadding)  + ")")
+            .call(d3.axisBottom(bandScale))
+          .selectAll("text")
+            .attr("y", 0)
+            .attr("x", 9)
+            .attr("dy", ".35em")
+            .attr("transform", "rotate(90)")
+            .style("text-anchor", "start");
+
+          // Add Y as
+          d3.select("body").select("svg")
+            .append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(150," + topPadding + ")")
+            .call(d3.axisLeft(yScale));
+
+          // Ad labels to the axes
+          d3.select("body").select("svg")
+            .append("text")
+            .text("Number of deaths 0-4 years old")
+            .attr("x", -450)
+            .attr("y", 90)
+            .attr("transform", "rotate(-90)");
+
+          // Make the bars
+          d3.select("body").select("svg").selectAll("rect")
+            .data(datas)
+            .enter()
+            .append("rect")
+            .attr("height", function(d) {
+              return h - yScale(d["0-4 years"]);
+            })
+            .attr("width", function(d){
+                return bandScale.bandwidth();
+            })
+            .attr("x", function(d) {
+                return bandScale(d["Region"]) + leftPadding;
+            })
+            .attr("y", function(d) {
+                return yScale(d["0-4 years"]) + topPadding;
+            })
+            .attr("fill", "teal")
+            .on('mouseenter', function (actual, i) {
+
+                var tooltip = d3.select(this)
+                  .append("div")
+                    .style("postion", "absolute")
+                    .style("visibility", "hidden")
+                    .text(function(d){d["0-4 years"]});
+
+                d3.select(this)
+                  .attr("fill", "red")
+                  // .html(function(d) {
+                  //       return "<strong>Deaths:</strong> <span style='color:red'>" + d + "</span>";
+                  // })
+                  .select("tooltip").style("visibility", "visible")
+            })
+            .on("mouseleave", function (actual, i){
+                d3.select(this)
+                  .attr("fill", "teal")
+                  .slect("tooltip").style("visibility", "hidden")
+            });
+
+          // Add text (.test class is made here since else new texts wont be made)
+          d3.select("body").select("svg").selectAll(".test")
+            .data(datas)
+            .enter()
+            .append("text")
+            .attr("class", "test")
+            .text(function(d) {
+                  return d["0-4 years"];
+             })
+
+             // Keep the numbers above the rectangles, since in some rectangles, there is no space.
+             .attr("x", function(d) {
+                 return bandScale(d["Region"]) + leftPadding;
+             })
+             .attr("y", function(d) {
+                 return yScale(d["0-4 years"]) + topPadding;
+             })
+        });
+
+    </script>
+    <svg width="600" height="800">
+    </svg>
+  </body>
+</html>
