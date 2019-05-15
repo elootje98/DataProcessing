@@ -1,0 +1,63 @@
+<!-- Elodie Rijnja 10984682 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="scatter.css">
+  <script type="text/javascript" src="D3/d3.js"></script>
+  <script type="text/javascript" src="transformresponse1.js"></script>
+  <script type="text/javascript" src="transformrespons2.js"></script>
+  <script type="text/javascript" src="update.js"></script>
+  <script type="text/javascript" src="scatter.js"></script>
+  <script src="d3-tip.js"></script>
+</head>
+<body>
+<h1>Living area and teenage pregnancy</h1>
+<p>Elodie Rijnja 10984682</p>
+<p>
+  <a href="https://data.mprog.nl/course/10%20Homework/100%20D3%20Scatterplot/datasets/teenpregnancy.json">Teenage pregnancy data</a>
+</p>
+<p>
+  <a href="https://data.mprog.nl/course/10%20Homework/100%20D3%20Scatterplot/datasets/teensarea.json">Living area data</a>
+</p>
+<p>
+  <a href="https://data.mprog.nl/course/10%20Homework/100%20D3%20Scatterplot/datasets/gdp.json">GDP data</a>
+</p>
+
+<div id="option">
+  <select>
+    <option selected value="All" onclick="loadAll()">All</option>
+    <option value="Austria" onclick="upDate(value)">Austria</option>
+    <option value="Belgium" onclick="upDate(value)">Belgium</option>
+    <option value="Czech Republic" onclick="upDate(value)">Czech Republic</option>
+    <option value="Denmark" onclick="upDate(value)">Denmark</option>
+    <option value="Finland" onclick="upDate(value)">Finland</option>
+    <option value="France" onclick="upDate(value)">France</option>
+    <option value="Greece" onclick="upDate(value)">Greece</option>
+    <option value="Hungary" onclick="upDate(value)">Hungary</option>
+    <option value="Iceland" onclick="upDate(value)">Iceland</option>
+    <option value="Ireland" onclick="upDate(value)">Ireland</option>
+    <option value="Italy" onclick="upDate(value)">Italy</option>
+    <option value="Luxembourg" onclick="upDate(value)">Luxembourg</option>
+    <option value="Netherlands" onclick="upDate(value)">Netherlands</option>
+    <option value="Norway" onclick="upDate(value)">Norway</option>
+    <option value="Poland" onclick="upDate(value)">Poland</option>
+    <option value="Portugal" onclick="upDate(value)">Portugal</option>
+    <option value="Slovak Republic" onclick="upDate(value)">Slovak Republic</option>
+    <option value="Spain" onclick="upDate(value)">Spain</option>
+    <option value="Sweden" onclick="upDate(value)">Sweden</option>
+    <option value="Switzerland" onclick="upDate(value)">Switzerland</option>
+    <option value="United Kingdom" onclick="upDate(value)">United Kingdom</option>
+    <option value="Bulgaria" onclick="upDate(value)">Bulgaria</option>
+    <option value="Croatia" onclick="upDate(value)">Croatia</option>
+    <option value="Cyprus" onclick="upDate(value)">Cyprus</option>
+    <option value="Estonia" onclick="upDate(value)">Estonia</option>
+    <option value="Latvia" onclick="upDate(value)">Latvia</option>
+    <option value="Lithuania" onclick="upDate(value)">Lithuania</option>
+    <option value="Malta" onclick="upDate(value)">Malta</option>
+    <option value="Romania" onclick="upDate(value)">Romania</option>
+    <option value="Slovenia" onclick="upDate(value)">Slovenia</option>
+  </select>
+</div>
+
+</body>
+</html>
