@@ -1,0 +1,68 @@
+function transformResponse1(data){
+
+    // Save data
+    let originalData = data;
+
+    // access data property of the response
+    let dataHere = data.dataSets[0].series;
+
+    // access variables in the response and save length for later
+    let series = data.structure.dimensions.series;
+    let seriesLength = series.length;
+
+    // set up array of variables and array of lengths
+    let varArray = [];
+    let lenArray = [];
+
+    series.forEach(function(serie){
+        varArray.push(serie);
+        lenArray.push(serie.values.length);
+    });
+
+    // get the time periods in the dataset
+    let observation = data.structure.dimensions.observation[0];
+
+    // add time periods to the variables, but since it's not included in the
+    // 0:0:0 format it's not included in the array of lengths
+    varArray.push(observation);
+
+    // create array with all possible combinations of the 0:0:0 format
+    let strings = Object.keys(dataHere);
+
+    // set up output object, an object with each country being a key and an array
+    // as value
+    let dataObject = {};
+
+    // for each string that we created
+    strings.forEach(function(string){
+        // for each observation and its index
+        observation.values.forEach(function(obs, index){
+            let data = dataHere[string].observations[index];
+            if (data != undefined){
+
+                // set up temporary object
+                let tempObj = {};
+
+                let tempString = string.split(":").slice(0, -1);
+                tempString.forEach(function(s, indexi){
+                    tempObj[varArray[indexi].name] = varArray[indexi].values[s].name;
+                });
+
+                // every datapoint has a time and ofcourse a datapoint
+                tempObj["Time"] = obs.name;
+                tempObj["Datapoint"] = data[0];
+                tempObj["Indicator"] = originalData.structure.dimensions.series[1].values[0].name;
+
+                // Add to total object
+                if (dataObject[tempObj["Country"]] == undefined){
+                  dataObject[tempObj["Country"]] = [tempObj];
+                } else {
+                  dataObject[tempObj["Country"]].push(tempObj);
+                };
+            }
+        });
+    });
+
+    // return the finished product!
+    return dataObject;
+  }
