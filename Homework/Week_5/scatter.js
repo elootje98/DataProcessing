@@ -57,7 +57,7 @@
               })
               countries = Object.keys(teenObject);
               numCountries = countries.length;
-              
+
               // Combine the two datasets into one array with datapoints.
               dataArray = [];
               for(var i = 0; i < numCountries; i++){
@@ -214,7 +214,7 @@
 
               // Create title
               svg.append("text")
-                .text("Teenagers in voilent areas")
+                .text("Teenage Pregnancies and living in voilent areas.")
                 .attr("x", w/2 - leftPadding)
                 .attr("y", padding)
 
