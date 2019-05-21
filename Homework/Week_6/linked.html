@@ -25,9 +25,11 @@
       console.log('v5', d3v5.version);
     </script>
     <div id="container" style="position: relative; width: 800px; height: 600px;"></div>
+    <div id="pie"></div>
     <script>
     d3v5.json("data.json").then(function(datas) {
 
+      console.log(datas)
       // Make a list with objects
       all_countries = {}
       for(var i = 0; i < 2196; i++){
@@ -48,7 +50,22 @@
           }
           country["Value"] = datas["fact"][i]["Value"];
           country["fillKey"] = fillKey;
-          code = toCountryCode(datas["fact"][i]["dims"]["COUNTRY"]);
+          country_name = datas["fact"][i]["dims"]["COUNTRY"];
+          code = toCountryCode(country_name);
+
+          // Also add seperated for Male and Female
+          for(var j = 0; j < 2196; j++){
+            // console.log(datas["fact"][j]["dims"]["Sex"]);
+            // console.log(datas["fact"][j]["dims"]["YEAR"]);
+            // console.log(datas["fact"][j]["dims"]["COUNTRY"]);
+
+            if(datas["fact"][j]["dims"]["SEX"] == "Male" && datas["fact"][j]["dims"]["YEAR"] == 2016 && datas["fact"][j]["dims"]["COUNTRY"] == country_name){
+              country["Male"] = datas["fact"][j]["Value"];
+            }
+            if(datas["fact"][j]["dims"]["SEX"] == "Female" && datas["fact"][j]["dims"]["YEAR"] == 2016 && datas["fact"][j]["dims"]["COUNTRY"] == country_name){
+              country["Female"] = datas["fact"][j]["Value"];
+            }
+          }
           all_countries[code] = country;
         }
       }
@@ -72,15 +89,97 @@
             },
             highlightBorderWidth: 3
           },
+          done: function(datamap) {
+            datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+                redraw([{"label": "Male", "value":all_countries[(geography.id)]["Male"]}, {"label": "Female", "value":all_countries[(geography.id)]["Female"]}]);
+            });
+          },
 
     });
-        // Draw a legend for this map
-        map.legend();
 
-    // Make a pie chart
+      // Draw a legend for this map
+      map.legend();
 
+      // Make a pie chart
+      data = [{"label": "Male", "value":all_countries["BEN"]["Male"]}, {"label": "Female", "value":all_countries["BEN"]["Female"]}];
 
-    });
+      // Make the height, width, radius
+      var w = 300,
+      h = 300,
+      r = 100,
+      color = d3v3.scale.category20c();
+
+      // Create an svg element
+      var vis = d3v3.select("body")
+          .append("svg:svg")
+          .data([data])
+              .attr("width", w)
+              .attr("height", h)
+          .append("svg:g")
+              .attr("transform", "translate(" + r + "," + r + ")")
+
+      var arc = d3v3.svg.arc()
+          .outerRadius(r);
+
+      var pie = d3v3.layout.pie()
+          .value(function(d) { return d.value; });
+
+      // Makes the slices
+      var arcs = vis.selectAll("g.slice")
+          .data(pie)
+          .enter()
+              .append("svg:g")
+                  .attr("class", "slice");
+
+          // Sets the color of every slice
+          arcs.append("svg:path")
+                  .attr("fill", function(d, i) { return color(i); } )
+                  .attr("d", arc);
+
+          // Puts text in every slice
+          arcs.append("svg:text")
+                  .attr("transform", function(d) {
+                  //we have to make sure to set these before calling arc.centroid
+                  d.innerRadius = 0;
+                  d.outerRadius = r;
+                  return "translate(" + arc.centroid(d) + ")";
+              })
+              .attr("text-anchor", "middle")
+              .text(function(d, i) { return data[i].label; });
+      });
+
+      function redraw(data){
+
+        // join
+        var arcs = vis.selectAll(".arc")
+            .data(pie(data), function(d){ return d.data.name; });
+
+        // update
+        arcs
+          .transition()
+            .duration(1500)
+            .attrTween("d", arcTween);
+
+        // enter
+        arcs.enter().append("path")
+          .attr("class", "arc")
+          .attr("fill", function(d, i) { return color(i); })
+          .attr("d", arc)
+          .each(function(d) { this._current = d; });
+
+      }
+
+      // Store the displayed angles in _current.
+      // Then, interpolate from _current to the new angles.
+      // During the transition, _current is updated in-place by d3.interpolate.
+      function arcTween(a) {
+        console.log(this._current);
+        var i = d3.interpolate(this._current, a);
+        this._current = i(0);
+        return function(t) {
+          return arc(i(t));
+        };
+    }
     </script>
 
     <!-- REST OF IMPORTS HERE -->
