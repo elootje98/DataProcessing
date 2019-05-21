@@ -91,6 +91,8 @@
           },
           done: function(datamap) {
             datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
+                console.log(all_countries[(geography.id)]["Male"]);
+                console.log(all_countries[(geography.id)]["Female"]);
                 redraw([{"label": "Male", "value":all_countries[(geography.id)]["Male"]}, {"label": "Female", "value":all_countries[(geography.id)]["Female"]}]);
             });
           },
@@ -103,55 +105,35 @@
       // Make a pie chart
       data = [{"label": "Male", "value":all_countries["BEN"]["Male"]}, {"label": "Female", "value":all_countries["BEN"]["Female"]}];
 
-      // Make the height, width, radius
-      var w = 300,
-      h = 300,
-      r = 100,
-      color = d3v3.scale.category20c();
+      // var data = [{"label": "Male", "value":10}, {"label": "Female", "value":4}];
 
-      // Create an svg element
-      var vis = d3v3.select("body")
-          .append("svg:svg")
-          .data([data])
-              .attr("width", w)
-              .attr("height", h)
-          .append("svg:g")
-              .attr("transform", "translate(" + r + "," + r + ")")
+      var margin = {top: 10, bottom: 10, left: 10, right: 10},
+        width = window.innerWidth - margin.left - margin.right,
+        height = window.innerHeight - margin.top - margin.bottom,
+        radius = Math.min(width, height) / 2;
 
-      var arc = d3v3.svg.arc()
-          .outerRadius(r);
+      var svg = d3v5.select("body").append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+          .attr("transform", "translate(" + ((width / 2) + margin.left) + "," + ((height / 2) + margin.top) + ")");
 
-      var pie = d3v3.layout.pie()
+      var color = d3v5.scaleOrdinal(["#66c2a5","#fc8d62","#8da0cb","#e78ac3","#a6d854","#ffd92f"])
+
+      var pie = d3v5.pie()
+          .sort(null)
           .value(function(d) { return d.value; });
 
-      // Makes the slices
-      var arcs = vis.selectAll("g.slice")
-          .data(pie)
-          .enter()
-              .append("svg:g")
-                  .attr("class", "slice");
+      var arc = d3v5.arc()
+          .outerRadius(radius)
+          .innerRadius(0);
 
-          // Sets the color of every slice
-          arcs.append("svg:path")
-                  .attr("fill", function(d, i) { return color(i); } )
-                  .attr("d", arc);
-
-          // Puts text in every slice
-          arcs.append("svg:text")
-                  .attr("transform", function(d) {
-                  //we have to make sure to set these before calling arc.centroid
-                  d.innerRadius = 0;
-                  d.outerRadius = r;
-                  return "translate(" + arc.centroid(d) + ")";
-              })
-              .attr("text-anchor", "middle")
-              .text(function(d, i) { return data[i].label; });
-      });
+      var data = [{"label": "Male", "value":10}, {"label": "Female", "value":4}];
 
       function redraw(data){
 
         // join
-        var arcs = vis.selectAll(".arc")
+        var arcs = svg.selectAll(".arc")
             .data(pie(data), function(d){ return d.data.name; });
 
         // update
@@ -167,19 +149,22 @@
           .attr("d", arc)
           .each(function(d) { this._current = d; });
 
+        // Remove if needed
+        arcs.exit().remove();
       }
 
       // Store the displayed angles in _current.
       // Then, interpolate from _current to the new angles.
-      // During the transition, _current is updated in-place by d3.interpolate.
+      // During the transition, _current is updated in-place by d3v3.interpolate.
       function arcTween(a) {
         console.log(this._current);
-        var i = d3.interpolate(this._current, a);
+        var i = d3v5.interpolate(this._current, a);
         this._current = i(0);
         return function(t) {
           return arc(i(t));
         };
-    }
+      }
+    });
     </script>
 
     <!-- REST OF IMPORTS HERE -->
