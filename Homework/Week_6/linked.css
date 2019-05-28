@@ -1,0 +1,33 @@
+#container{
+  font-family: verdana;
+  font-size: 150%;
+}
+
+body{
+  background-size: 1350px 650px;
+  font-family: verdana;
+  font-size: 80%;
+  background-attachment: fixed;
+}
+
+#box-one {
+margin: auto;
+width: 1000px;
+padding: 10px;
+background-color: #b4eeb4;
+border: 5px solid #b4eeb4;
+opacity: 1.0;
+text-align: center;
+}
+
+#box-two {
+margin: auto;
+width: 1000px;
+padding: 10px;
+background-color: #b4eeb4;
+border-bottom: 5px solid #b4eeb4;
+border-right: 5px solid #b4eeb4;
+border-left: 5px solid #b4eeb4;
+opacity: 0.6;
+text-align: center;
+}

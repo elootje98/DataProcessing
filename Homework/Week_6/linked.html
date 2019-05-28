@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <div id="box-one">
     <meta charset="utf-8">
     <title>Linked views</title>
-
+    <p>
+      <a href="http://apps.who.int/gho/data/node.main.MHSUICIDEASDR?lang=en">Suicide data</a>
+    </p>
     <!-- Import D3 V5 -->
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script>
@@ -17,6 +20,9 @@
     <!-- <script scr="redraw.js"></script> -->
     <script src="datamaps.world.min.js"></script>
     <script src="toCountryCode.js"></script>
+    <link rel="stylesheet" href="linked.css">
+    <!-- <script src ="makeMap.js"></script> -->
+
     <script>
       d3v3 = d3;
       window.d3 = null;
@@ -25,16 +31,17 @@
       console.log('v3', d3v3.version);
       console.log('v5', d3v5.version);
     </script>
-    <div id="container" style="position: relative; width: 800px; height: 600px;"></div>
+    <div id="container" style="position: relative; width: 1000px; height: 600px;"></div>
     <div id="pie"></div>
     <script src="map_work.js">
 
     </script>
 
+  </div>
     <!-- REST OF IMPORTS HERE -->
-
   </head>
-  <body>
+  <body background="serveimage.png">
+    
 
     <!-- CONTENT OF PAGE HERE -->
 
