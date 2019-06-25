@@ -4,7 +4,6 @@ function searchUpdate(allTaxes, adData){
   var code = toCountryCode(input);
 
   if(code == undefined){
-    console.log("not in");
     alert("Wrong input, you must enter a country");
   }
 
@@ -26,6 +25,10 @@ function searchUpdate(allTaxes, adData){
     // Update the line and spider graph
     updateLine(allTaxes[0][code]);
     updateSpider([adData[code]]);
+
+    // Make the drop down on the right selected.
+    d3v5.select("#select").select("option")
+      .property("selected", true);
 
     d3v5.select("body").select("#box-two").select("#line").select(".title")
       .text(toCountry(code));

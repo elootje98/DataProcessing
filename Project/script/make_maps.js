@@ -45,6 +45,10 @@ function make_map(datas, allTaxes, adData){
           updateLine(allTaxes[0][geography.id]);
           updateSpider([adData[geography.id]]);
 
+          // Change the drop down to the right value.
+          d3v5.select("#select").select("option")
+            .property("selected", true);
+
           d3v5.select("body").select("#box-two").select("#line").select(".title")
             .text(geography.properties.name);
 

@@ -34,7 +34,6 @@ function typeTaxes(type, datas){
         notEmpty = true;
         item["y"] = value;
         item["x"] = year;
-        // console.log(value);
         country.push(item);
         item = {}
       }
@@ -69,6 +68,13 @@ function makeLine(dataset){
   var yScale = d3v5.scaleLinear()
     .domain([0, 100])
     .range([height, 0]);
+
+  // Add a tooltip.
+  // var tip = d3v5.tip().attr('class', 'd3-tip').direction('e').offset([0,5])
+  //         .html(function(d) {
+  //           return d.y;
+  //         });
+  // d3v5.select("body").select("#box-two").select("#line").select("svg").call(tip);
 
   // D3's line generator.
   var line = d3v5.line()
@@ -148,6 +154,8 @@ function makeLine(dataset){
     .attr("cx", function(d) { return xScale(d.x) })
     .attr("cy", function(d) { return yScale(d.y) })
     .attr("r", 5)
+    // .on('mouseover', tip.show)
+    // .on('mouseout', tip.hide);
 }
 
 // Update the line chart.

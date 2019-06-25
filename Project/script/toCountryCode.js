@@ -255,13 +255,11 @@ function toCountryCode(country){
   return countryCode;
 }
 
-// Turns a code into their country. 
+// Turns a code into their country.
 function toCountry(code){
   var countries = Object.keys(countryCodes);
   for(var i = 0; i < 248; i++){
     if(countryCodes[countries[i]] == code){
-      console.log(code);
-      console.log(countries[i]);
       var country = countries[i];
       return country;
     }

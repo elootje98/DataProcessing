@@ -46,12 +46,6 @@ I tried to update my design a bit, by changing the colors.
 ## 24-06-2019
 Added text to the webpage. Also put the graphs in the right order.
 
-TODO:
-hightlihgy nbar
-spacev legedn
-black legend?
-block text
-
 fix bug in scatter2 plot
 make github clean
 tooltip taxes
