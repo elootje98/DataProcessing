@@ -1,0 +1,273 @@
+body {
+    background-size: 1350px 700px;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-align: center;
+}
+
+
+#box-one {
+margin: auto;
+width: 1000px;
+height: 900px;
+padding: 10px;
+background: #d9d9d9;
+box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.3);
+}
+
+#box-two {
+margin: auto;
+width: 1000px;
+height: 3000px;
+padding: 10px;
+background: #d9d9d9;
+box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.3);
+}
+
+#box-three {
+margin: auto;
+width: 1000px;
+padding: 10px;
+background-color: #2b8cbe;
+border-bottom: 5px solid #2b8cbe;
+border-right: 5px solid #2b8cbe;
+border-left: 5px solid #2b8cbe;
+opacity: 0.8;
+font-family: verdana;
+font-size: 100%;
+text-align: center;
+padding-top: 20px;
+}
+
+#map-text{
+  padding-left: 50px;
+  padding-right: 50px;
+  color: #252525;
+  transform: translate(0px, -100px);
+}
+
+#line-text{
+  padding-left: 50px;
+  padding-right: 50px;
+  color: #252525;
+  transform: translate(0px, -300px);
+}
+
+#line{
+  margin: auto;
+  width: 500px;
+  padding: 10px;
+  background-color: #d9d9d9;
+  opacity: 1;
+  transform: translate(0px, 320px);
+  color: #a00026;
+}
+
+#spider{
+  margin: auto;
+  width: 500px;
+  padding: 10px;
+  background-color: #d9d9d9;
+  opacity: 1;
+  transform: translate(-100px, 350px);
+  color: #a00026;
+}
+
+#spider-text{
+  padding-left: 50px;
+  padding-right: 50px;
+  color: #252525;
+  transform: translate(0px, -250px);
+}
+
+#scatter-text{
+  padding-left: 50px;
+  padding-right: 50px;
+  color: #252525;
+  transform: translate(0px, 300px);
+}
+
+#scatter{
+  margin: auto;
+  width: 500px;
+  padding: 10px;
+  background-color: #d9d9d9;
+  opacity: 1;
+  transform: translate(0px, 350px);
+  color: #a00026;
+}
+
+#scatter2-text{
+  padding-left: 50px;
+  padding-right: 50px;
+  color: #252525;
+  transform: translate(0px, 400px);
+}
+
+#scatter2{
+  margin: auto;
+  width: 500px;
+  padding: 10px;
+  background-color: #d9d9d9;
+  opacity: 1;
+  transform: translate(0px, 50px);
+  color: #a00026;
+}
+
+.datamaps {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+
+.datamaps-legend {
+    color: red;
+    right: -100px;
+    top: -650px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    transform: translate(0px, 700px);
+ }
+
+.datamaps-legend dl {
+  text-align: center;
+  display: inline-block;
+  position: static;
+}
+
+.both {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  color: red;
+  border-radius: 12px;
+  transform: translate(0px, -150px);
+}
+
+.both:hover {
+  background-color: red; /* Green */
+  color: white;
+}
+
+.women {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  color: red;
+  border-radius: 12px;
+  transform: translate(0px, -150px);
+}
+
+.women:hover {
+  background-color: red; /* Green */
+  color: white;
+}
+
+.men {
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  color: red;
+  border-radius: 12px;
+  transform: translate(0px, -150px);
+}
+
+.men:hover {
+  background-color: red; /* Green */
+  color: white;
+}
+
+.legend{
+  font-family: verdana;
+  font-size: 70%;
+  text-align: center;
+}
+
+.no-data{
+  font-family: verdana;
+  font-size: 150%;
+  text-align: left;
+}
+
+.title{
+  font-family: verdana;
+  font-size: 110%;
+  text-align: middle;
+}
+
+.d3-tip {
+    position: absolute;
+    text-align: center;
+    width: 120px;
+    height: 60px;
+    padding: 2px;
+    font: 12px sans-serif;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    transform: translate(0px, 200px);
+}
+
+.nav{
+    border-width:1px 0;
+    margin:0;
+    color:#4CAF50;
+    transform: translate(330px, 0px);
+}
+
+.active-page{
+  background-color: #4CAF50;
+  color: white;
+}
+
+select{
+  color: #bd0026;
+}
+/* #container {
+  margin: auto;
+  width: 1000px;
+  padding: 10px;
+  background-color: #FF0000;
+  border-bottom: 5px solid #FF0000;
+  border-right: 5px solid #FF0000;
+  border-left: 5px solid #FF0000;
+  opacity: 1.0;
+}
+
+path {
+      opacity: 3.0;
+    } */
+
+h1 {
+    color: black;
+    font-family: verdana;
+    font-size: 200%;
+    text-align: center;
+    padding-top: 20px;
+}
+
+h2 {
+    color: #FF0000;
+    font-family: verdana;
+    font-size: 150%;
+    text-align: center;
+    padding-top: 20px;
+}
+
+h3 {
+    color: black;
+    font-family: verdana;
+    font-size: 100%;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.line {
+    fill: none;
+    stroke: #ffab00;
+    stroke-width: 3;
+}
+
+.dot {
+    fill: #ffab00;
+    stroke: #fff;
+}
