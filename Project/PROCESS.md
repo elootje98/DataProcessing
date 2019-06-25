@@ -54,4 +54,4 @@ block text
 
 fix bug in scatter2 plot
 make github clean
-bootstrap navbar
+tooltip taxes
