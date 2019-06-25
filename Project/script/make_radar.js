@@ -41,13 +41,11 @@ var RadarChart = {
         .append("g")
         .attr("transform", "translate(" + cfg.TranslateX + "," + cfg.TranslateY + ")");
 
-		var tooltip;
-
     //Text indicating at what % each level is
     for(var j=0; j<cfg.levels; j++){
       var levelFactor = cfg.factor*radius*((j+1)/cfg.levels);
       g.selectAll(".levels")
-       .data([1]) //dummy data
+       .data([1])
        .enter()
        .append("svg:text")
        .attr("x", function(d){return levelFactor*(1-cfg.factor*Math.sin(0));})
@@ -255,8 +253,7 @@ var RadarChart = {
               .transition(200)
               .style("fill-opacity", cfg.opacityArea);
             })
-      .append("svg:title")
-      .text(function(j){return Math.max(j.value, 0)});
+      .append("svg:title");
 
       series++;
     });

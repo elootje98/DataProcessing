@@ -51,6 +51,7 @@ hightlihgy nbar
 spacev legedn
 black legend?
 block text
-script van andere folder inladen
-script opschonen
-fix bug in scatter2 plot 
+
+fix bug in scatter2 plot
+make github clean
+bootstrap navbar

@@ -17,6 +17,7 @@ function makeTaxdata(datas){
   return allTaxes;
 }
 
+// For every type of tax, load the data.
 function typeTaxes(type, datas){
 
   taxes = {}
@@ -52,36 +53,30 @@ function typeTaxes(type, datas){
   return taxes;
 }
 
+// Make the line chart.
 function makeLine(dataset){
 
-  // 2. Use the margin convention practice
   var margin = {top: 50, right: 50, bottom: 50, left: 50}
-  , width = 300 // Use the window's width
-  , height = 200; // Use the window's height
+  , width = 300
+  , height = 200;
 
-  // 5. X scale will use the index of our data
+  // Make scale for X values.
   var xScale = d3v5.scaleLinear()
-    .domain([2008, 2014]) // input
-    .range([0, width]); // output
+    .domain([2008, 2014])
+    .range([0, width]);
 
-  // 6. Y scale will use the randomly generate number
+  // Make scale for Y values.
   var yScale = d3v5.scaleLinear()
-    .domain([0, 100]) // input
-    .range([height, 0]); // output
+    .domain([0, 100])
+    .range([height, 0]);
 
-  // var tip = d3v5.tip().attr('class', 'd3-tip').direction('e').offset([0,5])
-  //         .html(function(d) {
-  //           return  d.y;
-  //         });
-  // d3v5.select("body").select("#box-two").select("#line").select("svg").call(tip);
-
-  // 7. d3's line generator
+  // D3's line generator.
   var line = d3v5.line()
-    .x(function(d, i) { return xScale(d.x); }) // set the x values for the line generator
-    .y(function(d) { return yScale(d.y); }) // set the y values for the line generator
-    .curve(d3v5.curveMonotoneX) // apply smoothing to the line
+    .x(function(d, i) { return xScale(d.x); })
+    .y(function(d) { return yScale(d.y); })
+    .curve(d3v5.curveMonotoneX)
 
-  // 1. Add the SVG to the page and employ #2
+  // Add svg.
   var svg = d3v5.select("body").select("#box-two").select("#line").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -90,20 +85,16 @@ function makeLine(dataset){
 
     tickValues = ["2008", "2010", "2012", "2014"];
 
-  // 3. Call the x axis in a group tag
   svg.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
     .call(d3v5.axisBottom(xScale)
       .tickFormat(d3v3.format("d"))
-      // .tickFormat(d3v5.timeFormat("%Y"))
       .tickValues(tickValues));
-  // Create an axis component with d3.axisBottom
 
-  // 4. Call the y axis in a group tag
   svg.append("g")
     .attr("class", "y axis")
-    .call(d3v5.axisLeft(yScale)); // Create an axis component with d3.axisLeft
+    .call(d3v5.axisLeft(yScale));
 
   // Give labels to the axis
   svg.append("text")
@@ -143,51 +134,47 @@ function makeLine(dataset){
     .attr("y", 100)
     .style("visibility", "hidden");
 
-  // 9. Append the path, bind the data, and call the line generator
+  // Append the path, bind the data, and call the line generator
   svg.append("path")
-    .datum(dataset) // 10. Binds data to the line
-    .attr("class", "line") // Assign a class for styling
-    .attr("d", line)// 11. Calls the line generator
+    .datum(dataset)
+    .attr("class", "line")
+    .attr("d", line)
 
-  // 12. Appends a circle for each datapoint
+  // Appends a circle for each datapoint
   svg.selectAll(".dot")
     .data(dataset)
-  .enter().append("circle") // Uses the enter().append() method
-    .attr("class", "dot") // Assign a class for styling
+  .enter().append("circle")
+    .attr("class", "dot")
     .attr("cx", function(d) { return xScale(d.x) })
     .attr("cy", function(d) { return yScale(d.y) })
     .attr("r", 5)
-    // .on('mouseover', tip.show)
-    // .on('mouseout', tip.hide);
 }
 
+// Update the line chart.
 function updateLine(data){
 
-  var width = 300 // Use the window's width
+  var width = 300
   var height = 200;
 
-  // 5. X scale will use the index of our data
   var xScale = d3v5.scaleLinear()
-    .domain([2008, 2014]) // input
-    .range([0, width]); // output
+    .domain([2008, 2014])
+    .range([0, width]);
 
-  // 6. Y scale will use the randomly generate number
   var yScale = d3v5.scaleLinear()
-    .domain([0, 100]) // input
-    .range([height, 0]); // output
+    .domain([0, 100])
+    .range([height, 0]);
 
   var line = d3v5.line()
-    .x(function(d) { return xScale(d.x); }) // set the x values for the line generator
-    .y(function(d) { return yScale(d.y); }) // set the y values for the line generator
-    .curve(d3v5.curveMonotoneX) // apply smoothing to the line
+    .x(function(d) { return xScale(d.x); })
+    .y(function(d) { return yScale(d.y); })
+    .curve(d3v5.curveMonotoneX)
 
-  // join
+  // Join.
   var dots = d3v5.select("body").select("#box-two").select("#line").select("svg").selectAll(".dot")
       .data(data);
 
-  // enter
   dots.enter().append("circle")
-    .attr("class", "dot") // Assign a class for styling
+    .attr("class", "dot")
     .attr("cx", function(d) { return xScale(d.x) })
     .attr("cy", function(d) { return yScale(d.y) })
     .attr("r", 5);
@@ -202,10 +189,7 @@ function updateLine(data){
     .duration(500)
     .attr("id","line1")
     .attr("d", line(data))
-    .attr("class", "line"); // Assign a class for styling
+    .attr("class", "line");
 
-
-
-  // lines.exit().remove();
   dots.exit().remove();
 }

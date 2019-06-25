@@ -1,7 +1,5 @@
-
-// Load the data
+// Transform the data for the adds.
 function makeAddata(datas) {
-  console.log(datas);
   var all_countries_ads = {}
   types = []
 
@@ -32,12 +30,11 @@ function makeAddata(datas) {
       }
     }
   }
-  console.log(all_countries_ads);
   return all_countries_ads;
 };
 
+// Make the spiderchart.
 function makeSpider(data){
-  console.log(data)
   var width = 300,
       height = 300;
 
@@ -52,11 +49,9 @@ function makeSpider(data){
 
   RadarChart.draw("#spider", data, config);
 };
-// TO DO: make this render function workk.
 
+// Update the spiderchart.
 function updateSpider(d){
-
-  console.log(d);
 
   var cfg = {
    radius: 5,
@@ -80,11 +75,10 @@ function updateSpider(d){
   var g = svg.select("g");
   var allAxis = (d[0].map(function(i, j){return i.area}));
   var total = allAxis.length;
-  // var dataValues = [];
 
   var dots = svg.select("g").selectAll("circle")
 
-  // enter
+  // Enter
   d.forEach(function(y, x){
     dataValues = [];
     dots.data(y)

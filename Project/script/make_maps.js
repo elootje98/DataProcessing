@@ -1,17 +1,6 @@
-
+// Makes the world maps and returns it.
 function make_map(datas, allTaxes, adData){
   var map = new Datamap({element: document.getElementById('container'),
-    // setProjection: function(element) {
-    //    var projection = d3v3.geo.equirectangular()
-    //      .center([10, 30])
-    //      .rotate([4.4, 0])
-    //      .scale(150)
-    //      .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
-    //    var path = d3v3.geo.path()
-    //      .projection(projection);
-    //
-    //    return {path: path, projection: projection};
-    //   },
     fills: {
       "<10": '#fecc5c',
       "10-20": '#fd8d3c',
@@ -37,7 +26,6 @@ function make_map(datas, allTaxes, adData){
     done: function(datamap) {
     datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
         if(allTaxes[0][(geography.id)] == undefined){
-          console.log('no data TO DO');
 
           // Don't show the line chart when there is no value
           d3v5.select("body").select("#box-two").select("#line")
@@ -69,19 +57,19 @@ function make_map(datas, allTaxes, adData){
             .on('click', function(){updateLine(allTaxes[0][countryTax])});
 
           d3v5.select("body").select("#box-two").select("#line").select(".Specific")
-            .on('click', function(){console.log(allTaxes[1][countryTax]); updateLine(allTaxes[1][countryTax])});
+            .on('click', function(){updateLine(allTaxes[1][countryTax])});
 
           d3v5.select("body").select("#box-two").select("#line").select(".Ad")
-            .on('click', function(){console.log(allTaxes[2][countryTax]); updateLine(allTaxes[2][countryTax])});
+            .on('click', function(){updateLine(allTaxes[2][countryTax])});
 
           d3v5.select("body").select("#box-two").select("#line").select(".Import")
-            .on('click', function(){console.log(allTaxes[3][countryTax]); updateLine(allTaxes[3][countryTax])});
+            .on('click', function(){updateLine(allTaxes[3][countryTax])});
 
           d3v5.select("body").select("#box-two").select("#line").select(".Value")
-            .on('click', function(){console.log(allTaxes[4][countryTax]); updateLine(allTaxes[4][countryTax])});
+            .on('click', function(){updateLine(allTaxes[4][countryTax])});
 
           d3v5.select("body").select("#box-two").select("#line").select(".Other")
-            .on('click', function(){console.log(allTaxes[5][countryTax]); updateLine(allTaxes[5][countryTax])});
+            .on('click', function(){updateLine(allTaxes[5][countryTax])});
         }
 
         if(adData[(geography.id)] == undefined){
@@ -103,6 +91,7 @@ function make_map(datas, allTaxes, adData){
   return map;
 }
 
+// Update the colors of the map with the new values.
 function update_map(map, datasx){
   map.updateChoropleth(datasx);
 }

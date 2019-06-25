@@ -1,7 +1,9 @@
+// Transforms the data such that it can be used to make the map, returns list. 
 function makeMapdata(datas){
 
     var all_countries = {}
 
+    // Collect the data for males and females combined.
     for(var i = 0; i < 2328; i++){
     country = {}
       if(datas["fact"][i]["dims"]["SEX"] == "Both sexes" && datas["fact"][i]["dims"]["GHO"] == "Daily tobacco smoking, age-standardised"
@@ -33,7 +35,7 @@ function makeMapdata(datas){
       }
     }
 
-    // Also do this for females
+    // Collect the data for females.
     var all_countries_females = {}
 
     for(var i = 0; i < 2328; i++){
@@ -67,7 +69,7 @@ function makeMapdata(datas){
       }
     }
 
-    // Also do this for males
+    // Collect the data for males.
     var all_countries_males = {}
 
     for(var i = 0; i < 2328; i++){

@@ -1,4 +1,4 @@
-
+// Makes the first scatterplot.
 function makeScatter(map, taxes){
 
     //Create SVG element
@@ -19,8 +19,7 @@ function makeScatter(map, taxes){
     var padding = 20;
     var leftPadding = 40;
 
-    // Should be a list with lists(country and two values inside).
-
+    // Check which countries are in both datasets.
     var sameCountries = [];
     var countries = Object.keys(map);
     var countriesTax = Object.keys(taxes);
@@ -30,6 +29,7 @@ function makeScatter(map, taxes){
       }
     }
 
+    // Put the combined data in an array.
     dataArray = [];
     for(var i = 0; i < 91; i++){
       var countryArray = [];
@@ -51,9 +51,7 @@ function makeScatter(map, taxes){
              .domain([0, 100])
              .range([h - padding, padding]);
 
-    // // Add color
-    // var color = d3v5.scaleOrdinal(d3v5.schemeCategory10);
-    //
+    // Add a tooltip.
     var tip = d3v5.tip().attr('class', 'd3-tip').direction('e').offset([0,5])
             .html(function(d) {
               var country = toCountry(d[0]);
@@ -91,7 +89,7 @@ function makeScatter(map, taxes){
         .attr("transform", "translate(" + (leftPadding) + "," + (h + padding) + ")")
         .call(d3v5.axisBottom(xScale))
 
-      //Create Y axis
+    //Create Y axis
     svg.append("g")
         .attr("class", "axis")
         .attr("transform", "translate(" + (leftPadding * 1.5) + "," + (2 * padding)+ ")")

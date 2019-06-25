@@ -1,4 +1,4 @@
-
+// Make the second scatterplot.
 function makeScatter2(map, adds){
 
     //Create SVG element
@@ -43,7 +43,6 @@ function makeScatter2(map, adds){
       dataArray.push(countryArray);
     }
 
-    // Make functions to scale the axes and radius.
     // There are 7 bans so that is the max in domain.
     var xScale = d3v5.scaleLinear()
              .domain([0, 7])
@@ -53,13 +52,10 @@ function makeScatter2(map, adds){
              .domain([0, 100])
              .range([h - padding, padding]);
 
-    // // Add color
-    // var color = d3v5.scaleOrdinal(d3v5.schemeCategory10);
-    //
+    // Make a tooltip.
     var tip = d3v5.tip().attr('class', 'd3-tip').direction('e').offset([0,5])
             .html(function(d) {
               var country = toCountry(d[0]);
-              console.log(country);
               return country + ": " + d[1] + ";" + d[2];
             });
     d3v5.select("body").select("#box-two").select("#scatter2").select("svg").call(tip);
@@ -95,7 +91,7 @@ function makeScatter2(map, adds){
         .call(d3v5.axisBottom(xScale)
           .ticks(7));
 
-      //Create Y axis
+    //Create Y axis
     svg.append("g")
         .attr("class", "axis")
         .attr("transform", "translate(" + (leftPadding * 1.5) + "," + (2 * padding)+ ")")
@@ -122,7 +118,5 @@ function makeScatter2(map, adds){
       .text("Number of tabacco advertising bans")
       .attr("x", w/7 - padding + 30)
       .attr("y", h + (3 * padding))
-      .style("fill", "#a00026");;
-
-    return dataArray;
+      .style("fill", "#a00026");
 }

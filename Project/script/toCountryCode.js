@@ -249,11 +249,13 @@ var countryCodes = {
   "Zimbabwe": "ZWE",
 };
 
+// Turns a country into their code.
 function toCountryCode(country){
   countryCode = countryCodes[country];
   return countryCode;
 }
 
+// Turns a code into their country. 
 function toCountry(code){
   var countries = Object.keys(countryCodes);
   for(var i = 0; i < 248; i++){
