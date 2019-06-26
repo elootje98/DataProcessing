@@ -58,7 +58,7 @@ function makeScatter2(map, adds){
               var country = toCountry(d[0]);
               return country + ": " + d[1] + ";" + d[2];
             });
-    d3v5.select("body").select("#box-two").select("#scatter2").select("svg").call(tip);
+    svg.call(tip);
 
     // Make a circle for each datapoint
     svg.selectAll("circle")

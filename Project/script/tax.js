@@ -69,18 +69,11 @@ function makeLine(dataset){
     .domain([0, 100])
     .range([height, 0]);
 
-  // Add a tooltip.
-  // var tip = d3v5.tip().attr('class', 'd3-tip').direction('e').offset([0,5])
-  //         .html(function(d) {
-  //           return d.y;
-  //         });
-  // d3v5.select("body").select("#box-two").select("#line").select("svg").call(tip);
-
   // D3's line generator.
   var line = d3v5.line()
     .x(function(d, i) { return xScale(d.x); })
     .y(function(d) { return yScale(d.y); })
-    .curve(d3v5.curveMonotoneX)
+    .curve(d3v5.curveMonotoneX);
 
   // Add svg.
   var svg = d3v5.select("body").select("#box-two").select("#line").append("svg")
@@ -89,7 +82,14 @@ function makeLine(dataset){
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    tickValues = ["2008", "2010", "2012", "2014"];
+  // Add a tooltip.
+  var taxtip = d3v5.tip().attr('class', 'd3-tip taxtip').direction('e').offset([0,5])
+          .html(function(d) {
+            return d.x + ": " + d.y;
+          });
+  svg.call(taxtip);
+
+  tickValues = ["2008", "2010", "2012", "2014"];
 
   svg.append("g")
     .attr("class", "x axis")
@@ -154,8 +154,8 @@ function makeLine(dataset){
     .attr("cx", function(d) { return xScale(d.x) })
     .attr("cy", function(d) { return yScale(d.y) })
     .attr("r", 5)
-    // .on('mouseover', tip.show)
-    // .on('mouseout', tip.hide);
+    .on('mouseover', taxtip.show)
+    .on('mouseout', taxtip.hide);
 }
 
 // Update the line chart.
@@ -178,7 +178,7 @@ function updateLine(data){
     .curve(d3v5.curveMonotoneX)
 
   // Join.
-  var dots = d3v5.select("body").select("#box-two").select("#line").select("svg").selectAll(".dot")
+  var dots = d3v5.select("body").select("#box-two").select("#line").select("svg").select("g").selectAll(".dot")
       .data(data);
 
   dots.enter().append("circle")

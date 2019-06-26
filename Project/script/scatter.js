@@ -57,7 +57,7 @@ function makeScatter(map, taxes){
               var country = toCountry(d[0]);
               return country + ": " + d[2] + ";" + d[1];
             });
-    d3v5.select("body").select("#box-two").select("#scatter").select("svg").call(tip);
+    svg.call(tip);
 
     // Make a circle for each datapoint
     svg.selectAll("circle")
