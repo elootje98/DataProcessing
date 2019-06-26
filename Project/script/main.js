@@ -12,6 +12,9 @@ Promise.all(loadData).then(function(data1){
   // Load the mapdata in mapdata is list with data for males, females and both.
   var mapData = makeMapdata(data1[0]);
   var tempData = {}
+
+  // Object.assing is done such that when updating the map, the data for both
+  // stays correct.
   Object.assign(tempData, mapData[0]);
   var map = make_map(tempData, allTaxes, adData);
 
@@ -25,6 +28,7 @@ Promise.all(loadData).then(function(data1){
   makeScatter(mapData[0], allTaxes[0]);
   makeScatter2(mapData[0], adData);
 
+  // When selecting the submit of the search, graphs get updated.
   d3v5.select("body").select(".submit")
     .on('click', function(){ searchUpdate(allTaxes, adData);
       });

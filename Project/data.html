@@ -1,171 +1,169 @@
 <!DOCTYPE html>
 <html lang ="en">
-    <head>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      <script src="https://d3js.org/d3.v5.min.js"></script>
-      <script>
-        d3v5 = d3;
-        window.d3 = null;
-      </script>
-      <!-- Import D3 V3 and TopoJSON -->
-      <script src="https://d3js.org/d3.v3.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
-      <!-- <script scr="redraw.js"></script> -->
-      <script src="script/spider.js"></script>
-      <script src="script/make_radar.js"></script>
-      <script src="script/main.js"></script>
-      <script src="script/datamaps.world.min.js"></script>
-      <script src="script/toCountryCode.js"></script>
-      <script src="script/d3-tip.js"></script>
-      <script src="script/make_maps.js"></script>
-      <script src="script/scatter.js"></script>
-      <script src="script/scatter2.js"></script>
-      <script src="script/searchUpdate.js"></script>
-      <script>
-        d3v3 = d3;
-        window.d3 = null;
-      </script>
-      <script src="script/map.js">  </script>
-      <script src="script/tax.js"></script>
-      <link href="script/style.css" rel="stylesheet">
-        <title>
-            Smoking
-        </title>
+  <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script>
+      d3v5 = d3;
+      window.d3 = null;
+    </script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/1.6.9/topojson.min.js"></script>
+    <script src="script/spider.js"></script>
+    <script src="script/make_radar.js"></script>
+    <script src="script/main.js"></script>
+    <script src="script/datamaps.world.min.js"></script>
+    <script src="script/toCountryCode.js"></script>
+    <script src="script/d3-tip.js"></script>
+    <script src="script/make_maps.js"></script>
+    <script src="script/scatter.js"></script>
+    <script src="script/scatter2.js"></script>
+    <script src="script/searchUpdate.js"></script>
+    <script>
+      d3v3 = d3;
+      window.d3 = null;
+    </script>
+    <script src="script/map.js">  </script>
+    <script src="script/tax.js"></script>
+    <link href="script/style.css" rel="stylesheet">
+    <title>
+        Smoking
+    </title>
   </head>
-    <body background="serveimage.jpeg">
-      <div class"container">
-        <div class="topnav">
-          <nav class="fixed-nav-bar navbar navbar-expand-sm bg-dark navbar-dark">
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="nav">
-                <li class="nav-item active">
-                  <a class="nav-link" href="index.html">Home<span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item active active-page">
-                  <a class="nav-link" href="data.html">Data <span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="http://apps.who.int/gho/data/node.main.1250?lang=en">Source smokers<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="http://apps.who.int/gho/data/node.main.TOB1307?lang=en">Source taxes<span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item active">
-                  <a class="nav-link" href="http://apps.who.int/gho/data/node.main.1291?lang=en">Source advertising<span class="sr-only"></span></a>
-                </li>
-                <input type="text" id="myText" placeholder="Search a country">
-                <button class="fa fa-search submit" type="submit"><i></i></button>
-              </ul>
-            </div>
-          </nav>
-        </div>
-        <div id="box-one">
-          <div id="container" style="position: relative; width: 900px; height: 675px;"></div>
-          <button class="women">Women</button>
-          <button class="men">Men</button>
-          <button class="both">Both</button>
-          <div id="map-text">
-            <p>
-              On this map you can see the percentage of smokers in every country.
-              It looks like a high percentage of the population in Europe smokes
-              tabacco daily. Also the country with the highest percentage lies
-              in Europe: Greece (35.2%).
-            </p>
-            <p>
-              Click on the buttons and see how the map changes color. When clicking
-              on 'women' the map gets filled with much brighter colors. Overall,
-              women smoke less than men. Some experts say that the amouth of
-              women that smoke compareed to the males in that country, says
-              something about the emancipation of that country. Observe how
-              country colors change when switching between women and males.
-              You will see that Western countries don't change that much in color.
-              Nevertheless, countries like for example, Indonesia, change from yellow
-              to dark red. In conclusion: in Western countries women contribute
-              more to the total percentage of smokers than in other countries.
-            </p>
+  <body background="docs/serveimage.jpeg">
+    <div class"container">
+      <div class="topnav">
+        <nav class="fixed-nav-bar navbar navbar-expand-sm bg-dark navbar-dark">
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home<span class="sr-only"></span></a>
+              </li>
+              <li class="nav-item active active-page">
+                <a class="nav-link" href="data.html">Data <span class="sr-only"></span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="http://apps.who.int/gho/data/node.main.1250?lang=en">Source smokers<span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="http://apps.who.int/gho/data/node.main.TOB1307?lang=en">Source taxes<span class="sr-only"></span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="http://apps.who.int/gho/data/node.main.1291?lang=en">Source advertising<span class="sr-only"></span></a>
+              </li>
+              <input type="text" id="myText" placeholder="Search a country">
+              <button class="fa fa-search submit" type="submit"><i></i></button>
+            </ul>
           </div>
-        </div>
-        <div id="box-two">
-          <div id="line">
-            <select id="select">
-              <option class= "Total" selected value="Total tax">Total tax</option>
-              <option class= "Specific" value="Specific excise">Specific excise</option>
-              <option class="Ad" value="Ad valorem">Ad valorem</option>
-              <option class="Import" value="Import duties">Import duties</option>
-              <option class="Value" value="Value added tax">Value added tax</option>
-              <option class="Other" value="other taxes">Other taxes</option>
-            </select>
-          </div>
-          <div id="line-text">
-            <p>
-              Click on some countries on the map and see how the line graph
-              changes. In the drop-down menu you can choose different kind
-              of taxes. Take note of the fact that in Europe the hight of the
-              taxes vary a lot between the countries. Greece, the country with
-              the highest smokers percentage, has a total tax of 12.00%. However,
-              they drastically rose this value to 42.90% in 2014.
-              Be aware of the fact that the values in the map are from 2013, so
-              the value of taxes in 2014 won't have effected the percentage of
-              smokers on the map!
-              If higher taxes would have an effect on the percentage of smokers,
-              you would expect high taxes in countries with few smokers, and the
-              other way around. However, for example in Germany there are relatively
-              many smokers(24.2%), but the taxes are also high(35.80%).
-              The oposite is seen in Mexico, with a smokers percentage of 8.3% and
-              only 15.40% total tax.
-            </p>
-          </div>
-          <div id="spider">
-          </div>
-          <div id="spider-text">
-            <p>
-              When clicking on a country on the map, also the spiderchart changes.
-              On the axes the types of advertising bans are displayed.
-              You would expect that in countries with little advertising for
-              tabacco, there would be less smokers. This can be seen in Panama
-              (3.9% smokers), where no advertisement is allowed. It's also interesting
-              to see that Panama has a total tax of 0% on cigarettes.
-              Hover, in Jordan, where there is also no advertisement allowed,
-              has a smokers percentage of 31.0%.
-            </p>
-          </div>
-          <div id="scatter-text">
-            <p>
-              In this scatterplot the effect of taxes on the percentage of smokers
-              is shown. It seems that taxes don't have an effect on the percentage
-              of smokers. For example, in countries where there are no taxes on
-              sigarettes, the percentage of smokers varies between 3.9% and 27.8%.
-              However, the counry with the highest taxes (Singapore with 67.30%),
-              has a low percentage of smokers(13.2%).
-              Hover of the dots to see the exact value and the country they belong
-              to.
-            </p>
-          </div>
-          <div id="scatter">
-          </div>
-          <div id="scatter2-text">
-            <p>
-              Here the relation between the amouth of advertising bans and
-              the percentage of smokers is shown. A strong correlations between
-              advertising bans and the percentage of smokers can not be seen.
-              However, it seems that
-            </p>
-          <div>
-          <div id="scatter2">
-          </div>
+        </nav>
+      </div>
+      <div id="box-one">
+        <div id="container" style="position: relative; width: 900px; height: 675px;"></div>
+        <button class="women">Women</button>
+        <button class="men">Men</button>
+        <button class="both">Both</button>
+        <div id="map-text">
+          <p>
+            On this map you can see the percentage of smokers in every country.
+            It looks like a high percentage of the population in Europe smokes
+            tabacco daily. Also the country with the highest percentage lies
+            in Europe: Greece (35.2%).
+          </p>
+          <p>
+            Click on the buttons and see how the map changes color. When clicking
+            on 'women' the map gets filled with much brighter colors. Overall,
+            women smoke less than men. Some experts say that the amouth of
+            women that smoke compareed to the males in that country, says
+            something about the emancipation of that country. Observe how
+            country colors change when switching between women and males.
+            You will see that Western countries don't change that much in color.
+            Nevertheless, countries like for example, Indonesia, change from yellow
+            to dark red. In conclusion: in Western countries women contribute
+            more to the total percentage of smokers than in other countries.
+          </p>
         </div>
       </div>
-    </body>
-    <footer>
-        <small>
-            <time>
-                <h3>
-        Updated 06-06-2019
-                </h3>
-            </time>
-        </small>
-    </footer>
+      <div id="box-two">
+        <div id="line">
+          <select id="select">
+            <option class= "Total" selected value="Total tax">Total tax</option>
+            <option class= "Specific" value="Specific excise">Specific excise</option>
+            <option class="Ad" value="Ad valorem">Ad valorem</option>
+            <option class="Import" value="Import duties">Import duties</option>
+            <option class="Value" value="Value added tax">Value added tax</option>
+            <option class="Other" value="other taxes">Other taxes</option>
+          </select>
+        </div>
+        <div id="line-text">
+          <p>
+            Click on some countries on the map and see how the line graph
+            changes. In the drop-down menu you can choose different kind
+            of taxes. Take note of the fact that in Europe the hight of the
+            taxes vary a lot between the countries. Greece, the country with
+            the highest smokers percentage, has a total tax of 12.00%. However,
+            they drastically rose this value to 42.90% in 2014.
+            Be aware of the fact that the values in the map are from 2013, so
+            the value of taxes in 2014 won't have effected the percentage of
+            smokers on the map!
+            If higher taxes would have an effect on the percentage of smokers,
+            you would expect high taxes in countries with few smokers, and the
+            other way around. However, for example in Germany there are relatively
+            many smokers(24.2%), but the taxes are also high(35.80%).
+            The oposite is seen in Mexico, with a smokers percentage of 8.3% and
+            only 15.40% total tax.
+          </p>
+        </div>
+        <div id="spider">
+        </div>
+        <div id="spider-text">
+          <p>
+            When clicking on a country on the map, also the spiderchart changes.
+            On the axes the types of advertising bans are displayed.
+            You would expect that in countries with little advertising for
+            tabacco, there would be less smokers. This can be seen in Panama
+            (3.9% smokers), where no advertisement is allowed. It's also interesting
+            to see that Panama has a total tax of 0% on cigarettes.
+            Hover, in Jordan, where there is also no advertisement allowed,
+            has a smokers percentage of 31.0%.
+          </p>
+        </div>
+        <div id="scatter-text">
+          <p>
+            In this scatterplot the effect of taxes on the percentage of smokers
+            is shown. It seems that taxes don't have an effect on the percentage
+            of smokers. For example, in countries where there are no taxes on
+            sigarettes, the percentage of smokers varies between 3.9% and 27.8%.
+            However, the counry with the highest taxes (Singapore with 67.30%),
+            has a low percentage of smokers(13.2%).
+            Hover of the dots to see the exact value and the country they belong
+            to.
+          </p>
+        </div>
+        <div id="scatter">
+        </div>
+        <div id="scatter2-text">
+          <p>
+            Here the relation between the amouth of advertising bans and
+            the percentage of smokers is shown. A strong correlations between
+            advertising bans and the percentage of smokers can not be seen.
+            However, it seems that
+          </p>
+        <div>
+        <div id="scatter2">
+        </div>
+      </div>
+    </div>
+  </body>
+  <footer>
+      <small>
+          <time>
+              <h3>
+                Updated 26-06-2019
+              </h3>
+          </time>
+      </small>
+  </footer>
 </html>
 <!-- TO DO; MAKE THE BUTTONS (ONE FOR THE DIFFERENT KIND OF TAXES AND ONE FOR
 MALE/FEMALE/BOTH WORLD MAP) -->

@@ -48,8 +48,3 @@ Added text to the webpage. Also put the graphs in the right order.
 
 ## 25-06-2019
 Changed the design of the navbar.
-
-make github clean
-
-Licence of other people???
-docs folder?
