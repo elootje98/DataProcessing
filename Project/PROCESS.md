@@ -47,8 +47,12 @@ I tried to update my design a bit, by changing the colors.
 Added text to the webpage. Also put the graphs in the right order.
 
 ## 25-06-2019
-Changed the design of the navbar. 
+Changed the design of the navbar.
 
 fix bug in scatter2 plot
 make github clean
 tooltip taxes
+story teller ?
+
+Licence of other people???
+style MD

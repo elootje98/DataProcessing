@@ -19,7 +19,7 @@ Promise.all(loadData).then(function(data1){
   makeLine(allTaxes[0]["USA"]);
 
   // Make spider.
-  makeSpider([adData["ALB"]]);
+  makeSpider([adData["USA"]]);
 
   // Make the two scatterplots.
   makeScatter(mapData[0], allTaxes[0]);

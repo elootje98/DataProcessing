@@ -1,30 +1,54 @@
-# Project
+## The effect of advertising bans and taxes on the percentage of smokers in a country.
+This data visualization is made by Elodie Rijnja.
 
-## Problem
-Smoking is avoidable cause of death number one. Governments try to reduce smoking under their inhabitants by taking various steps. For example, rising taxes or ban commercials for sigarettes. The logical question is therefore: “Are there less smokers in countries where the government takes steps against smoking?”
+![](map.png)
+First an overview is given on how many people are smoking in every country.
+It's possible for the user to also see this for males and females seperately.
 
-## Solution
-MVP: making a map with color coded how many smokers every country has. The user can hover over the countries to see the exact number of smokers.
-There will be a scatterplot with the two variables smokers and taxes on cigarettes. The scatterplot will update when clicking on a certain country.
-Also when clicking on a country, a spiderchart for that country will be shown. In the spiderchart the different kind of bans
-on advertising will be displayed.
-Optional: The user can select "Female", "Male" or Both for the world map and the scatterplot. The user can check checkboxes for the different kinds of advertising, then the corresponding countries will appear. Instead of using a map, a globe that the user can turn. Add time as an extra variable in the scatterplot.
+![](tax.png)
+A country on the map can be clicked in order to see the corresponding average
+% of taxes of cigarette price in that country. Different types of taxes can be
+chosen.
 
-![](IMG_5526.png)
+![](add.png)
+Furthermore, after clicking a country on the map, there will be shown how many
+advertising bans a country has.
 
-## Links
+![](scatter.png)
+![](scatter2.png)
+Since it's hard to keep an overview over the countries taxes, advertising bans
+and the percentage of smokers, two scatterplots have been made. One containig the
+parameters taxes and percentage of smokers. The other one containing advertising
+bans and percentage of smokers.
+
+![](search.png)
+To make it more convenient for the user, there is a search bar. In this search
+bar the user can type a country. After pressing the button, the scatter- and
+spiderplot are updated to that country.
+
+## Sources
+http://jonsadka.com/blog/how-to-create-live-updating-and-flexible-d3-line-charts-using-pseudo-data
+https://www.cdc.gov/tobacco/data_statistics/fact_sheets/fast_facts/
+https://getbootstrap.com/docs/4.0/components/navbar/
+https://blockbuilder.org/Ananda90/8269def4e60b17d57d358b2e8219f62d
+https://bl.ocks.org/gordlea/27370d1eea8464b04538e6d8ced39e89
+https://bl.ocks.org/mattdh666/b941fd20978cfad1398739c2563aee1f
+https://www.w3schools.com/howto/howto_css_search_button.asp
+
+
+d3-tip.js
+https://raw.githubusercontent.com/markmarkoh/datamaps/master/dist/datamaps.world.min.js
+datamaps.world.min.js
+
+smoking.json
 http://apps.who.int/gho/data/node.main.1250?lang=en
+tax.json
 http://apps.who.int/gho/data/node.main.TOB1307?lang=en
-http://apps.who.int/gho/data/node.main.1291?lang=
+advertising.json
+http://apps.who.int/gho/data/node.main.1291?lang=en
 
-## External
-D3
+![](smoking.png)
+https://cancerfocusni.org/cancer-prevention/smoking/
 
-## Similar
-https://www.cdc.gov/statesystem/excisetax.html
-Here the taxes on cigarettes in the USA are displayed on the map of the USA. I will probably also make a map, but then representing the number of smokers per country.
-https://ourworldindata.org/smoking
-The timeline that is used could be a nice idea to implement as an extra.
-
-## Hardest part
-The hardest part will be to link all the visualizations and make sure the updates work and work smoothly.
+## Copyright
+Copyright, 26-06-2019, Elodie Rijnja. All Rights Reserved.
